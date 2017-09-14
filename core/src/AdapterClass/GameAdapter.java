@@ -5,5 +5,5 @@ package AdapterClass;
  */
 
 public interface GameAdapter {
-    public void showToast(String s);
+     void showToast(String s);
 }

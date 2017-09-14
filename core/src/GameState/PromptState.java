@@ -26,7 +26,8 @@ public class PromptState extends State {
                     if (x>=0&&x<=15 ){
                         lengthword=x;
                         // proceed to next state by setting the screen
-
+                        game.getStateManager().push(new PlayState(game,lengthword));
+                        game.setScreen(game.getStateManager().peek());
                     }
                     else{
                         game.getGameAdapter().showToast("Please input a proper word length");

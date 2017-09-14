@@ -9,7 +9,7 @@ import GameState.State;
  */
 
 public class StateManager {
-    Stack<State> stack;
+    private Stack<State> stack;
     public  StateManager(){
         stack= new Stack<State>();
     }
