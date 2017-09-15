@@ -3,6 +3,7 @@ package GameState;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.WorDropGame;
 
@@ -34,7 +35,7 @@ public class PromptState extends State {
                         Gdx.input.getTextInput(listener, "Input your word length", "", "");
                     }
                 }
-                catch (Exception e){
+                catch (NumberFormatException e){
                     Gdx.input.getTextInput(listener, "Input your word length", "", "");
                     game.getGameAdapter().showToast("Please input a proper word length");
                 }
@@ -60,6 +61,7 @@ public class PromptState extends State {
 
     @Override
     public void render(float delta) {
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.getBatch().begin();
         game.getBatch().draw(background,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         game.getBatch().end();
