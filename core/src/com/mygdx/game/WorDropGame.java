@@ -14,40 +14,45 @@ import GameState.WelcomeState;
 import Manager.StateManager;
 
 public class WorDropGame extends Game {
-	private SpriteBatch batch;
-	private GameAdapter gameAdapter;
+    private SpriteBatch batch;
+    private GameAdapter gameAdapter;
     private StateManager stateManager;
-	public WorDropGame(GameAdapter ga){
-		gameAdapter=ga;
-	}
-	@Override
-	public void create () {
-        batch=new SpriteBatch();
-        stateManager=new StateManager();
+
+    public WorDropGame(GameAdapter ga) {
+        gameAdapter = ga;
+    }
+
+    @Override
+    public void create() {
+        batch = new SpriteBatch();
+        stateManager = new StateManager();
         stateManager.push(new WelcomeState(this));
-		this.setScreen(stateManager.peek());
+        this.setScreen(stateManager.peek());
         Gdx.graphics.setContinuousRendering(false);
         Gdx.graphics.requestRendering();
         //Gdx.input.setCatchBackKey(true); // void the back key on android
-	}
+    }
 
-	@Override
-	public void render () {
+    @Override
+    public void render() {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // This cryptic line clears the screen.
         super.render();// call the render() from the current screen
-	}
-	
-	@Override
-	public void dispose () {
-		batch.dispose();
-	}
-	public SpriteBatch getBatch(){
-		return batch;
-	}
-	public GameAdapter getGameAdapter(){
-		return gameAdapter;
-	}
-	public StateManager getStateManager(){
+    }
+
+    @Override
+    public void dispose() {
+        batch.dispose();
+    }
+
+    public SpriteBatch getBatch() {
+        return batch;
+    }
+
+    public GameAdapter getGameAdapter() {
+        return gameAdapter;
+    }
+
+    public StateManager getStateManager() {
         return stateManager;
     }
 }

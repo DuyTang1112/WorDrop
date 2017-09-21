@@ -10,17 +10,21 @@ import GameState.State;
 
 public class StateManager {
     private Stack<State> stack;
-    public  StateManager(){
-        stack= new Stack<State>();
+
+    public StateManager() {
+        stack = new Stack<State>();
     }
-    public void push(State s){
+
+    public void push(State s) {
         stack.push(s);
     }
-    public void pop(){
-        stack.pop();
+
+    public void pop() {
+        stack.pop().dispose();
         stack.peek().resetListener();
     }
-    public State peek(){
+
+    public State peek() {
         return stack.peek();
     }
 }

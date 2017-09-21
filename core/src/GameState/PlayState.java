@@ -6,43 +6,35 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.WorDropGame;
+
+import Entity.Ball;
+import Entity.BucketWagon;
 
 /**
  * Created by Duy Anh Tang on 9/13/2017.
  */
 
 public class PlayState extends State {
+    public static int wordlength;
+    public static final Vector2 gravity= new Vector2(0,-400);
     Texture background,heartLife;
-    int wordlength;
-    Animation<TextureRegion> wheelsAnimation;
-
-    Rectangle wheelRect;
-    float wheelDistance;
-    float velocity;
-    Texture whole;
-    float stateTime=0;
+    Ball ball;
+    BucketWagon bucketWagon;
+    Rectangle pauseBttnRect;
+    Texture pauseBttn;
     public PlayState(WorDropGame ga,int wl){
         super(ga);
         wordlength=wl;
         background=new Texture("image\\background2.jpg");
         heartLife=new Texture("image\\heart.png");
+        pauseBttn=new Texture("PlayState\\PauseBttn.png");
+        pauseBttnRect=new Rectangle((float) (Gdx.graphics.getWidth()*4.9/6),Gdx.graphics.getHeight()-Gdx.graphics.getWidth()/5,
+                Gdx.graphics.getWidth()/6,Gdx.graphics.getWidth()/6);
         Gdx.graphics.setContinuousRendering(true);
-        whole=new Texture(Gdx.files.internal("PlayState\\wheels.png"));
-
-        TextureRegion[][] tmp= TextureRegion.split(whole,512/16,256/8);
-        TextureRegion[] frames= new TextureRegion[16*8];
-        int index=0;
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 16; j++) {
-                frames[index++] = tmp[i][j];
-            }
-        }
-        wheelsAnimation = new Animation<TextureRegion>(1f/10f, frames);
-        stateTime=0f;
-        wheelRect =new Rectangle(0,20,Gdx.graphics.getWidth()/10,Gdx.graphics.getWidth()/10);
-        velocity=5;// velocity of the bucket wagon
-        wheelDistance=Gdx.graphics.getWidth()/4;
+        bucketWagon=new BucketWagon(5);
+        ball=new Ball("s");
     }
 
     @Override
@@ -56,20 +48,21 @@ public class PlayState extends State {
     }
 
     @Override
+
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stateTime+=Gdx.graphics.getDeltaTime();
-        TextureRegion temp=wheelsAnimation.getKeyFrame(stateTime,true);
         game.getBatch().begin();
+        //draw background
         game.getBatch().draw(background,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        //draw the heart counter
         game.getBatch().draw(heartLife,Gdx.graphics.getWidth()/20, Gdx.graphics.getHeight()*8/9,
                 Gdx.graphics.getWidth()/7,Gdx.graphics.getWidth()/7);
-        game.getBatch().draw(temp, wheelRect.x, wheelRect.y, wheelRect.getWidth(), wheelRect.getHeight());
-        game.getBatch().draw(temp, wheelRect.x+wheelDistance, wheelRect.y, wheelRect.getWidth(), wheelRect.getHeight());
-        wheelRect.x+=velocity;
-        if (wheelRect.x+wheelDistance+wheelRect.getWidth()>=Gdx.graphics.getWidth() || wheelRect.x<0){
-            velocity=-velocity;
-        }
+        // draw the pause button
+        game.getBatch().draw(pauseBttn,pauseBttnRect.getX(),pauseBttnRect.getY(),pauseBttnRect.getWidth(),pauseBttnRect.getHeight());
+        //draw the ball
+        ball.draw(game.getBatch(),delta);
+        //draw the wagon
+        bucketWagon.draw(game.getBatch(),delta);
         game.getBatch().end();
     }
 
@@ -95,6 +88,10 @@ public class PlayState extends State {
 
     @Override
     public void dispose() {
-
+        ball.dispose();
+        bucketWagon.dispose();
+        pauseBttn.dispose();
+        heartLife.dispose();
+        background.dispose();
     }
 }
