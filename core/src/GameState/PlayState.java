@@ -1,7 +1,10 @@
 package GameState;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -18,28 +21,42 @@ import Entity.BucketWagon;
 
 public class PlayState extends State {
     public static int wordlength;
-    public static final Vector2 gravity= new Vector2(0,-400);
-    Texture background,heartLife;
+    public static final Vector2 gravity = new Vector2(0, -800);
+    Texture background, heartLife;
     Ball ball;
     BucketWagon bucketWagon;
     Rectangle pauseBttnRect;
     Texture pauseBttn;
-    public PlayState(WorDropGame ga,int wl){
+
+
+    public PlayState(WorDropGame ga, int wl) {
         super(ga);
-        wordlength=wl;
-        background=new Texture("image\\background2.jpg");
-        heartLife=new Texture("image\\heart.png");
-        pauseBttn=new Texture("PlayState\\PauseBttn.png");
-        pauseBttnRect=new Rectangle((float) (Gdx.graphics.getWidth()*4.9/6),Gdx.graphics.getHeight()-Gdx.graphics.getWidth()/5,
-                Gdx.graphics.getWidth()/6,Gdx.graphics.getWidth()/6);
+        wordlength = wl;
+        background = new Texture("image\\background2.jpg");
+        heartLife = new Texture("image\\heart.png");
+        pauseBttn = new Texture("PlayState\\PauseBttn.png");
+        pauseBttnRect = new Rectangle((float) (game.WIDTH * 4.9 / 6), game.HEIGHT - game.WIDTH / 5,
+                game.WIDTH / 6, game.WIDTH / 6);
         Gdx.graphics.setContinuousRendering(true);
-        bucketWagon=new BucketWagon(5);
-        ball=new Ball("s");
+        bucketWagon = new BucketWagon(5);
+        ball = new Ball("s");
+        resetListener();
     }
 
     @Override
     public void resetListener() {
-
+        Gdx.input.setInputProcessor(new InputAdapter() {
+            @Override
+            public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+                if (pauseBttnRect.contains(screenX,game.HEIGHT-screenY)){
+                    // set the screen to pause state
+                    game.getStateManager().push(new PauseState(game));
+                    game.setScreen(game.getStateManager().peek());
+                    Gdx.input.setInputProcessor(null);
+                }
+                return super.touchDown(screenX, screenY, pointer, button);
+            }
+        });
     }
 
     @Override
@@ -51,18 +68,20 @@ public class PlayState extends State {
 
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        camera.update();
         game.getBatch().begin();
+        game.getBatch().setProjectionMatrix(camera.combined);
         //draw background
-        game.getBatch().draw(background,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        game.getBatch().draw(background, 0, 0, game.WIDTH, game.HEIGHT);
         //draw the heart counter
-        game.getBatch().draw(heartLife,Gdx.graphics.getWidth()/20, Gdx.graphics.getHeight()*8/9,
-                Gdx.graphics.getWidth()/7,Gdx.graphics.getWidth()/7);
+        game.getBatch().draw(heartLife, game.WIDTH / 20, game.HEIGHT * 8 / 9,
+                game.WIDTH / 7, game.WIDTH / 7);
         // draw the pause button
-        game.getBatch().draw(pauseBttn,pauseBttnRect.getX(),pauseBttnRect.getY(),pauseBttnRect.getWidth(),pauseBttnRect.getHeight());
+        game.getBatch().draw(pauseBttn, pauseBttnRect.getX(), pauseBttnRect.getY(), pauseBttnRect.getWidth(), pauseBttnRect.getHeight());
         //draw the ball
-        ball.draw(game.getBatch(),delta);
+        ball.draw(game.getBatch(), delta);
         //draw the wagon
-        bucketWagon.draw(game.getBatch(),delta);
+        bucketWagon.draw(game.getBatch(), delta);
         game.getBatch().end();
     }
 
@@ -93,5 +112,52 @@ public class PlayState extends State {
         pauseBttn.dispose();
         heartLife.dispose();
         background.dispose();
+    }
+
+    public class PlayState2 extends State{
+        Ball ball;
+        public PlayState2() {
+            super(PlayState.this.game);
+        }
+
+        @Override
+        public void resetListener() {
+
+        }
+
+        @Override
+        public void show() {
+
+        }
+
+        @Override
+        public void render(float delta) {
+
+        }
+
+        @Override
+        public void resize(int width, int height) {
+
+        }
+
+        @Override
+        public void pause() {
+
+        }
+
+        @Override
+        public void resume() {
+
+        }
+
+        @Override
+        public void hide() {
+
+        }
+
+        @Override
+        public void dispose() {
+
+        }
     }
 }

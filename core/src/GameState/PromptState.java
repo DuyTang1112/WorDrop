@@ -62,8 +62,11 @@ public class PromptState extends State {
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        camera.update();
         game.getBatch().begin();
-        game.getBatch().draw(background,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        game.getBatch().setProjectionMatrix(camera.combined);
+        camera.update();
+        game.getBatch().draw(background,0,0, game.WIDTH,game.HEIGHT);
         game.getBatch().end();
         if (Gdx.input.justTouched()){
             Gdx.input.getTextInput(listener, "Input your word length", "", "");

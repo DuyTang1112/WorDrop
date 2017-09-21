@@ -22,10 +22,10 @@ public class WelcomeState extends State {
         background = new Texture("image\\background.png");
         playButton = new Texture("image\\PlayButton.png");
         playBttnArea = new Rectangle();
-        playBttnArea.setX(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8);
-        playBttnArea.setY(Gdx.graphics.getHeight() * 2 / 4);
-        playBttnArea.setWidth(Gdx.graphics.getWidth() / 4);
-        playBttnArea.setHeight(Gdx.graphics.getWidth() / 4);
+        playBttnArea.setX(game.WIDTH / 2 - game.WIDTH / 8);
+        playBttnArea.setY(game.HEIGHT * 2 / 4);
+        playBttnArea.setWidth(game.WIDTH / 4);
+        playBttnArea.setHeight(game.WIDTH / 4);
         resetListener();
     }
 
@@ -38,7 +38,7 @@ public class WelcomeState extends State {
                 //Gdx.app.error("Delta time", ""+Gdx.graphics.getDeltaTime());
 
                 Gdx.app.error("touched in", x + "/" + y);
-                if (playBttnArea.contains(x, Gdx.graphics.getHeight() - y)) {
+                if (playBttnArea.contains(x, game.HEIGHT - y)) {
                     Gdx.app.error("PLAYED!!!", "right now");
                     game.getStateManager().push(new PromptState(game));
                     game.setScreen(game.getStateManager().peek());
@@ -63,11 +63,13 @@ public class WelcomeState extends State {
     public void render(float delta) {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        camera.update();
         game.getBatch().begin();
-        game.getBatch().draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        game.getBatch().setProjectionMatrix(camera.combined);
+        game.getBatch().draw(background, 0, 0, game.WIDTH, game.HEIGHT);
 
-        game.getBatch().draw(title, Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() * 3 / 8,
-                Gdx.graphics.getHeight() * 3 / 4, Gdx.graphics.getWidth() * 3 / 4, Gdx.graphics.getHeight() / 7);// Title has width=screenwidth/2
+        game.getBatch().draw(title, game.WIDTH / 2 - game.WIDTH * 3 / 8,
+                game.HEIGHT * 3 / 4, game.WIDTH * 3 / 4, game.HEIGHT / 7);// Title has width=screenwidth/2
         game.getBatch().draw(playButton, playBttnArea.getX(), playBttnArea.getY(), playBttnArea.getWidth(), playBttnArea.getHeight());
         game.getBatch().end();
 
