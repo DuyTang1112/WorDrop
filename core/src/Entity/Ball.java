@@ -16,10 +16,10 @@ public class Ball extends Circle{
     float startTime;
     Vector2 position, velocity;
     Texture ballImage;
-    String currentLetter;
+    char currentLetter;
     static float width = Gdx.graphics.getWidth() / 10, height = Gdx.graphics.getWidth() / 10;
 
-    public Ball(String s) {
+    public Ball(char s) {
         super(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() * 8 / 9 + height/2,width/2);
         //initial position
         position = new Vector2(Gdx.graphics.getWidth() / 2 - width / 2, Gdx.graphics.getHeight() * 8 / 9 - height);
@@ -30,7 +30,7 @@ public class Ball extends Circle{
 
     }
 
-    public Ball(String s, Vector2 startPos) {
+    public Ball(char s, Vector2 startPos) {
         //initial position
         position = startPos;
         velocity = new Vector2(0, 500);//initial velocity
@@ -39,17 +39,19 @@ public class Ball extends Circle{
         this.startTime = 0;
     }
 
-    public void reset(String s) {
-        currentLetter = s;
+    public void reset(char s) {
+        currentLetter= s;
         startTime = 0;
     }
 
     public void draw(SpriteBatch sb, float deltatime) {
         if (y-radius <= 0 || y+radius>=Gdx.graphics.getHeight()) {
             velocity.y=-velocity.y;
+
         }
         if (x+radius>=Gdx.graphics.getWidth()|| x-radius<=0){
             velocity.x=-velocity.x;
+
         }
         deltatime=Math.min(deltatime,1f/45f);
         sb.draw(ballImage, position.x, position.y, width, height);

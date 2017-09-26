@@ -23,7 +23,7 @@ public class PlayState extends State {
     public static int wordlength;
     public static final Vector2 gravity = new Vector2(0, -800);
     Texture background, heartLife;
-    Ball ball;
+   // Ball ball;
     BucketWagon bucketWagon;
     Rectangle pauseBttnRect;
     Texture pauseBttn;
@@ -39,7 +39,7 @@ public class PlayState extends State {
                 game.WIDTH / 6, game.WIDTH / 6);
         Gdx.graphics.setContinuousRendering(true);
         bucketWagon = new BucketWagon(5);
-        ball = new Ball("s");
+        //ball = new Ball("s");
         resetListener();
     }
 
@@ -53,6 +53,9 @@ public class PlayState extends State {
                     game.getStateManager().push(new PauseState(game));
                     game.setScreen(game.getStateManager().peek());
                     Gdx.input.setInputProcessor(null);
+                }
+                else{
+                    game.getGameAdapter().voiceInput();
                 }
                 return super.touchDown(screenX, screenY, pointer, button);
             }
@@ -76,10 +79,19 @@ public class PlayState extends State {
         //draw the heart counter
         game.getBatch().draw(heartLife, game.WIDTH / 20, game.HEIGHT * 8 / 9,
                 game.WIDTH / 7, game.WIDTH / 7);
+        //draw it 90 degree rotating
+        /*game.getBatch().draw(heartLife,game.WIDTH/20,game.HEIGHT*8/9,
+                125/2,125/2,
+                game.WIDTH/7,game.WIDTH/7,
+                1,1,
+                -90,
+                0,0,
+                125,125,
+                false,false);*/
         // draw the pause button
         game.getBatch().draw(pauseBttn, pauseBttnRect.getX(), pauseBttnRect.getY(), pauseBttnRect.getWidth(), pauseBttnRect.getHeight());
         //draw the ball
-        ball.draw(game.getBatch(), delta);
+        //ball.draw(game.getBatch(), delta);
         //draw the wagon
         bucketWagon.draw(game.getBatch(), delta);
         game.getBatch().end();
@@ -97,7 +109,17 @@ public class PlayState extends State {
 
     @Override
     public void resume() {
-
+        String result=game.getGameAdapter().getVoiceInput();
+        Gdx.app.error("String",result+" blahblah");
+        if (result.split(" ").length>1){
+            game.getGameAdapter().showToast("Say a letter, not a whole sentence!");
+        }
+        else{
+            Gdx.input.setInputProcessor(null);
+            game.getGameAdapter().showToast("You said the letter: "+result.toUpperCase().charAt(0));
+            game.getStateManager().push(new PlayState2(result.charAt(0)));
+            game.setScreen(game.getStateManager().peek());
+        }
     }
 
     @Override
@@ -107,7 +129,7 @@ public class PlayState extends State {
 
     @Override
     public void dispose() {
-        ball.dispose();
+        //ball.dispose();
         bucketWagon.dispose();
         pauseBttn.dispose();
         heartLife.dispose();
@@ -116,13 +138,27 @@ public class PlayState extends State {
 
     public class PlayState2 extends State{
         Ball ball;
-        public PlayState2() {
+
+        public PlayState2(char c) {
             super(PlayState.this.game);
+            ball=new Ball(c);
+            resetListener();
         }
 
         @Override
         public void resetListener() {
-
+            Gdx.input.setInputProcessor(new InputAdapter() {
+                @Override
+                public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+                    if (pauseBttnRect.contains(screenX,game.HEIGHT-screenY)){
+                        // set the screen to pause state
+                        game.getStateManager().push(new PauseState(game));
+                        game.setScreen(game.getStateManager().peek());
+                        Gdx.input.setInputProcessor(null);
+                    }
+                    return super.touchDown(screenX, screenY, pointer, button);
+                }
+            });
         }
 
         @Override
@@ -132,7 +168,22 @@ public class PlayState extends State {
 
         @Override
         public void render(float delta) {
-
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+            camera.update();
+            game.getBatch().begin();
+            game.getBatch().setProjectionMatrix(camera.combined);
+            //draw background
+            game.getBatch().draw(background, 0, 0, game.WIDTH, game.HEIGHT);
+            //draw the heart counter
+            game.getBatch().draw(heartLife, game.WIDTH / 20, game.HEIGHT * 8 / 9,
+                    game.WIDTH / 7, game.WIDTH / 7);
+            // draw the pause button
+            game.getBatch().draw(pauseBttn, pauseBttnRect.getX(), pauseBttnRect.getY(), pauseBttnRect.getWidth(), pauseBttnRect.getHeight());
+            //draw the ball
+            ball.draw(game.getBatch(), delta);
+            //draw the wagon
+            bucketWagon.draw(game.getBatch(), delta);
+            game.getBatch().end();
         }
 
         @Override
@@ -157,7 +208,7 @@ public class PlayState extends State {
 
         @Override
         public void dispose() {
-
+            ball.dispose();
         }
     }
 }

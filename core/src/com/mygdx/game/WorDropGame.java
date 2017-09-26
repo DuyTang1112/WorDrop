@@ -18,16 +18,17 @@ public class WorDropGame extends Game {
     private SpriteBatch batch;
     private GameAdapter gameAdapter;
     private StateManager stateManager;
-    public  int WIDTH;
-    public  int HEIGHT;
+    public int WIDTH;
+    public int HEIGHT;
+
     public WorDropGame(GameAdapter ga) {
         gameAdapter = ga;
     }
 
     @Override
     public void create() {
-        WIDTH=Gdx.graphics.getWidth();
-        HEIGHT=Gdx.graphics.getHeight();
+        WIDTH = Gdx.graphics.getWidth();
+        HEIGHT = Gdx.graphics.getHeight();
         batch = new SpriteBatch();
 
         stateManager = new StateManager();

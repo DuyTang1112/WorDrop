@@ -5,6 +5,10 @@ package AdapterClass;
  */
 
 public interface GameAdapter {
-     void showToast(String s);
-     //String voiceInput()
+    void showToast(String s);
+
+    void voiceInput();
+
+    String getVoiceInput();
+
 }
