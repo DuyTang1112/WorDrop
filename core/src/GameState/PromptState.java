@@ -24,7 +24,7 @@ public class PromptState extends State {
                 Gdx.app.error("Input text",text);
                 try {
                     int x=Integer.parseInt(text);
-                    if (x>=0&&x<=15 ){
+                    if (x>=5&&x<=12 ){
                         lengthword=x;
                         // proceed to next state by setting the screen
                         game.getStateManager().push(new PlayState(game,lengthword));

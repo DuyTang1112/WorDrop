@@ -23,7 +23,7 @@ public class PlayState extends State {
     public static int wordlength;
     public static final Vector2 gravity = new Vector2(0, -800);
     Texture background, heartLife;
-   // Ball ball;
+    // Ball ball;
     BucketWagon bucketWagon;
     Rectangle pauseBttnRect;
     Texture pauseBttn;
@@ -38,9 +38,10 @@ public class PlayState extends State {
         pauseBttnRect = new Rectangle((float) (game.WIDTH * 4.9 / 6), game.HEIGHT - game.WIDTH / 5,
                 game.WIDTH / 6, game.WIDTH / 6);
         Gdx.graphics.setContinuousRendering(true);
-        bucketWagon = new BucketWagon(5);
+        bucketWagon = new BucketWagon(wordlength);
         //ball = new Ball("s");
         resetListener();
+        game.getGameAdapter().showToast("CLICK THE SCREEN!");
     }
 
     @Override
@@ -48,13 +49,12 @@ public class PlayState extends State {
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-                if (pauseBttnRect.contains(screenX,game.HEIGHT-screenY)){
+                if (pauseBttnRect.contains(screenX, game.HEIGHT - screenY)) {
                     // set the screen to pause state
                     game.getStateManager().push(new PauseState(game));
                     game.setScreen(game.getStateManager().peek());
                     Gdx.input.setInputProcessor(null);
-                }
-                else{
+                } else {
                     game.getGameAdapter().voiceInput();
                 }
                 return super.touchDown(screenX, screenY, pointer, button);
@@ -109,17 +109,18 @@ public class PlayState extends State {
 
     @Override
     public void resume() {
-        String result=game.getGameAdapter().getVoiceInput();
-        Gdx.app.error("String",result+" blahblah");
-        if (result.split(" ").length>1){
-            game.getGameAdapter().showToast("Say a letter, not a whole sentence!");
-        }
-        else{
+        String result = game.getGameAdapter().getVoiceInput();
+        Gdx.app.error("String", result + " blahblah");
+        if (result.length() > 0) {
             Gdx.input.setInputProcessor(null);
-            game.getGameAdapter().showToast("You said the letter: "+result.toUpperCase().charAt(0));
+            game.getGameAdapter().showToast("You said the letter: " + result.toUpperCase().charAt(0));
             game.getStateManager().push(new PlayState2(result.charAt(0)));
             game.setScreen(game.getStateManager().peek());
         }
+        else {
+            game.getGameAdapter().showToast("SAID AGAIN!!");
+        }
+
     }
 
     @Override
@@ -136,12 +137,12 @@ public class PlayState extends State {
         background.dispose();
     }
 
-    public class PlayState2 extends State{
+    public class PlayState2 extends State {
         Ball ball;
 
         public PlayState2(char c) {
             super(PlayState.this.game);
-            ball=new Ball(c);
+            ball = new Ball(c);
             resetListener();
         }
 
@@ -150,7 +151,7 @@ public class PlayState extends State {
             Gdx.input.setInputProcessor(new InputAdapter() {
                 @Override
                 public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-                    if (pauseBttnRect.contains(screenX,game.HEIGHT-screenY)){
+                    if (pauseBttnRect.contains(screenX, game.HEIGHT - screenY)) {
                         // set the screen to pause state
                         game.getStateManager().push(new PauseState(game));
                         game.setScreen(game.getStateManager().peek());

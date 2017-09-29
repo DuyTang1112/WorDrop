@@ -12,7 +12,7 @@ import GameState.PlayState;
  * Created by Duy Anh Tang on 9/19/2017.
  */
 
-public class Ball extends Circle{
+public class Ball extends Circle implements Entity{
     float startTime;
     Vector2 position, velocity;
     Texture ballImage;
@@ -44,17 +44,8 @@ public class Ball extends Circle{
         startTime = 0;
     }
 
-    public void draw(SpriteBatch sb, float deltatime) {
-        if (y-radius <= 0 || y+radius>=Gdx.graphics.getHeight()) {
-            velocity.y=-velocity.y;
-
-        }
-        if (x+radius>=Gdx.graphics.getWidth()|| x-radius<=0){
-            velocity.x=-velocity.x;
-
-        }
-        deltatime=Math.min(deltatime,1f/45f);
-        sb.draw(ballImage, position.x, position.y, width, height);
+    @Override
+    public void update(float deltatime) {
         //update velocity
         velocity.y += PlayState.gravity.y * (deltatime);
         velocity.x += PlayState.gravity.x * (deltatime);
@@ -67,6 +58,20 @@ public class Ball extends Circle{
         //debug
         Gdx.app.error("Velocity", velocity.x+";"+velocity.y );
         Gdx.app.error("Position",position.x+";"+position.y);
+    }
+
+    public void draw(SpriteBatch sb, float deltatime) {
+        if (y-radius <= 0 || y+radius>=Gdx.graphics.getHeight()) {
+            velocity.y=-velocity.y;
+
+        }
+        if (x+radius>=Gdx.graphics.getWidth()|| x-radius<=0){
+            velocity.x=-velocity.x;
+
+        }
+        deltatime=Math.min(deltatime,1f/45f);
+        sb.draw(ballImage, position.x, position.y, width, height);
+        update(deltatime);
 
     }
 

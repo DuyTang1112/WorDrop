@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.mygdx.game.WorDropGame;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Locale;
 
 import AdapterClass.GameAdapter;
@@ -69,7 +71,17 @@ public class AndroidLauncher extends AndroidApplication implements GameAdapter {
 
                     ArrayList<String> result = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    res=result.get(0);
+                    Iterator<String> it=result.iterator();
+                    while (it.hasNext()){
+                        String s=it.next();
+                        // only choosing a letter input
+                        if (s.length()==1){
+                            res=s;
+                            break;
+                        }
+                    }
+
+                    Log.d("Reading input list",result.toString());
                 }
                 break;
             }
