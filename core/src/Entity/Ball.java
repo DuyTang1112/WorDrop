@@ -34,7 +34,7 @@ public class Ball extends Circle implements Entity{
         super(startPos.x+width/2,startPos.y+height/2,width/2);
         //initial position
         position = startPos;
-        velocity = new Vector2(Math.random()>0.5?-600:600, 0);//initial velocity
+        velocity = new Vector2(Math.random()>0.5?-200:200, 0);//initial velocity
         currentLetter = s;
         ballImage = new Texture("PlayState\\ball1.png");
         this.startTime = 0;

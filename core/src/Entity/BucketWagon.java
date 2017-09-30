@@ -48,7 +48,7 @@ public class BucketWagon implements Entity{
         bucketPos=new Rectangle[numBuckets];
         bucketPos[0]=new Rectangle(wheelRect.x,wheelRect.getHeight(), //position of the first one
                 Gdx.graphics.getWidth()/9,Gdx.graphics.getWidth()/9); //width and height of each bucket
-        bucketPos[0].setX(bucketPos[0].x-(bucketPos[0].getWidth()*numBuckets/2-(wheelDistance/2)));
+        bucketPos[0].setX(bucketPos[0].x-(bucketPos[0].getWidth()*(numBuckets-1)/2-(wheelDistance/2)));
         //setting position for consecutive buckets
         for (int i=1;i<bucketPos.length;i++){
             bucketPos[i]=new Rectangle(bucketPos[i-1].getX()+bucketPos[i-1].getWidth(),bucketPos[i-1].getY(),

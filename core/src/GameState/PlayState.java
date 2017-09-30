@@ -2,12 +2,8 @@ package GameState;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.WorDropGame;
@@ -42,7 +38,7 @@ public class PlayState extends State {
         arrowRect=new Rectangle();
         arrowRect.setWidth(game.WIDTH/15);
         arrowRect.setHeight(game.WIDTH/8);
-        arrowRect.setX(0);
+        arrowRect.setX(10);
         arrowRect.setY(game.HEIGHT*8/9-arrowRect.getHeight());
         game.arrowVelocity=new Vector2(500,0);
 
