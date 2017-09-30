@@ -17,7 +17,7 @@ public class Ball extends Circle implements Entity{
     Vector2 position, velocity;
     Texture ballImage;
     char currentLetter;
-    static float width = Gdx.graphics.getWidth() / 10, height = Gdx.graphics.getWidth() / 10;
+    static float width = Gdx.graphics.getWidth() / 12, height = width;
 
     public Ball(char s) {
         super(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() * 8 / 9 + height/2,width/2);
@@ -31,9 +31,10 @@ public class Ball extends Circle implements Entity{
     }
 
     public Ball(char s, Vector2 startPos) {
+        super(startPos.x+width/2,startPos.y+height/2,width/2);
         //initial position
         position = startPos;
-        velocity = new Vector2(0, 500);//initial velocity
+        velocity = new Vector2(Math.random()>0.5?-600:600, 0);//initial velocity
         currentLetter = s;
         ballImage = new Texture("PlayState\\ball1.png");
         this.startTime = 0;
@@ -61,6 +62,7 @@ public class Ball extends Circle implements Entity{
     }
 
     public void draw(SpriteBatch sb, float deltatime) {
+        //check if the ball hits any where
         if (y-radius <= 0 || y+radius>=Gdx.graphics.getHeight()) {
             velocity.y=-velocity.y;
 

@@ -8,6 +8,9 @@ import GameState.State;
  * Created by Duy Anh Tang on 9/13/2017.
  */
 
+/**
+ * Managing back and forth between States
+ */
 public class StateManager {
     private Stack<State> stack;
 

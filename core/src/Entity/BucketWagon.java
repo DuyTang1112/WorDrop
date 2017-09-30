@@ -41,12 +41,15 @@ public class BucketWagon implements Entity{
         wheelRect = new Rectangle(0, 20, Gdx.graphics.getWidth() / 10, Gdx.graphics.getWidth() / 10);
         this.velocity = velocity;// velocity of the bucket wagon
         wheelDistance = Gdx.graphics.getWidth() / 4;
+
         // bucket list set up
         bucketImg=new Texture("image\\bucket.png");
         this.numBuckets=numBuckets;
         bucketPos=new Rectangle[numBuckets];
-        bucketPos[0]=new Rectangle(wheelRect.x,wheelRect.getHeight(),Gdx.graphics.getWidth()/9,Gdx.graphics.getWidth()/9);
+        bucketPos[0]=new Rectangle(wheelRect.x,wheelRect.getHeight(), //position of the first one
+                Gdx.graphics.getWidth()/9,Gdx.graphics.getWidth()/9); //width and height of each bucket
         bucketPos[0].setX(bucketPos[0].x-(bucketPos[0].getWidth()*numBuckets/2-(wheelDistance/2)));
+        //setting position for consecutive buckets
         for (int i=1;i<bucketPos.length;i++){
             bucketPos[i]=new Rectangle(bucketPos[i-1].getX()+bucketPos[i-1].getWidth(),bucketPos[i-1].getY(),
                     bucketPos[i-1].getWidth(),bucketPos[i-1].getHeight());
@@ -83,6 +86,7 @@ public class BucketWagon implements Entity{
     }
     @Override
     public void dispose() {
+        bucketImg.dispose();
 
     }
 }

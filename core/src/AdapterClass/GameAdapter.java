@@ -4,6 +4,9 @@ package AdapterClass;
  * Created by Duy Anh Tang on 9/13/2017.
  */
 
+/**
+ * An interface to use native Android components inside libgdx module
+ */
 public interface GameAdapter {
     /**
      * Show a toast with message
@@ -17,8 +20,8 @@ public interface GameAdapter {
     void voiceInput();
 
     /**
-     *
-     * @return the voice input result
+     *  Return voice input result after calling voiceInput()
+     * @return the string result
      */
     String getVoiceInput();
 

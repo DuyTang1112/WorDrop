@@ -22,7 +22,7 @@ public abstract class State implements Screen {
     }
 
     /**
-     * Reset input listener in case if turned off
+     * Reset input listener in case if turned off (for cases like when go back and forth between states)
      */
     public abstract void resetListener();
 

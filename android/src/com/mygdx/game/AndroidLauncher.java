@@ -32,7 +32,7 @@ public class AndroidLauncher extends AndroidApplication implements GameAdapter {
 		handler.post(new Runnable() {
 			@Override
 			public void run() {
-				Toast.makeText(AndroidLauncher.this,s,Toast.LENGTH_LONG).show();
+				Toast.makeText(AndroidLauncher.this,s,Toast.LENGTH_SHORT).show();
 			}
 		});
 	}

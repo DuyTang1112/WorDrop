@@ -22,22 +22,32 @@ import Entity.BucketWagon;
 public class PlayState extends State {
     public static int wordlength;
     public static final Vector2 gravity = new Vector2(0, -800);
-    Texture background, heartLife;
-    // Ball ball;
+    Texture background, heartLife,arrow;
     BucketWagon bucketWagon;
-    Rectangle pauseBttnRect;
+    Rectangle pauseBttnRect,arrowRect;
     Texture pauseBttn;
-
+    Vector2 arrowVelocity;
 
     public PlayState(WorDropGame ga, int wl) {
         super(ga);
         wordlength = wl;
         background = new Texture("image\\background2.jpg");
         heartLife = new Texture("image\\heart.png");
-        pauseBttn = new Texture("PlayState\\PauseBttn.png");
-        pauseBttnRect = new Rectangle((float) (game.WIDTH * 4.9 / 6), game.HEIGHT - game.WIDTH / 5,
+        //pause button
+        pauseBttn = new Texture("PlayState\\PauseBttn2.png");
+        pauseBttnRect = new Rectangle((float) (game.WIDTH * 4.9 / 6), game.HEIGHT - game.WIDTH / 6,
                 game.WIDTH / 6, game.WIDTH / 6);
+        //arrow set up
+        arrow=new Texture("image\\arrow.png");
+        arrowRect=new Rectangle();
+        arrowRect.setWidth(game.WIDTH/15);
+        arrowRect.setHeight(game.WIDTH/8);
+        arrowRect.setX(0);
+        arrowRect.setY(game.HEIGHT*8/9-arrowRect.getHeight());
+        game.arrowVelocity=new Vector2(500,0);
+
         Gdx.graphics.setContinuousRendering(true);
+
         bucketWagon = new BucketWagon(wordlength);
         //ball = new Ball("s");
         resetListener();
@@ -90,11 +100,17 @@ public class PlayState extends State {
                 false,false);*/
         // draw the pause button
         game.getBatch().draw(pauseBttn, pauseBttnRect.getX(), pauseBttnRect.getY(), pauseBttnRect.getWidth(), pauseBttnRect.getHeight());
-        //draw the ball
-        //ball.draw(game.getBatch(), delta);
+        //draw the arrow
+        game.getBatch().draw(arrow,arrowRect.x,arrowRect.y,arrowRect.getWidth(),arrowRect.getHeight());
         //draw the wagon
         bucketWagon.draw(game.getBatch(), delta);
         game.getBatch().end();
+
+        //update the arrow position
+        arrowRect.setX(arrowRect.x+game.arrowVelocity.x*delta);
+        if (arrowRect.x<=0||arrowRect.x+arrowRect.getWidth()>=game.WIDTH){
+            game.arrowVelocity.x=-game.arrowVelocity.x;
+        }
     }
 
     @Override
@@ -107,18 +123,21 @@ public class PlayState extends State {
 
     }
 
+    /**
+     *  Getting the voice input
+     */
     @Override
     public void resume() {
         String result = game.getGameAdapter().getVoiceInput();
-        Gdx.app.error("String", result + " blahblah");
+        Gdx.app.error("String", result );
         if (result.length() > 0) {
             Gdx.input.setInputProcessor(null);
             game.getGameAdapter().showToast("You said the letter: " + result.toUpperCase().charAt(0));
-            game.getStateManager().push(new PlayState2(result.charAt(0)));
+            game.getStateManager().push(new PlayState2(result.charAt(0),new Vector2(arrowRect.x,arrowRect.y)));
             game.setScreen(game.getStateManager().peek());
         }
         else {
-            game.getGameAdapter().showToast("SAID AGAIN!!");
+            game.getGameAdapter().showToast("SAY AGAIN!!");
         }
 
     }
@@ -135,14 +154,18 @@ public class PlayState extends State {
         pauseBttn.dispose();
         heartLife.dispose();
         background.dispose();
+        arrow.dispose();
     }
 
+    /**
+     * Inner class because of reasons
+     */
     public class PlayState2 extends State {
         Ball ball;
 
-        public PlayState2(char c) {
+        public PlayState2(char c,Vector2 pos) {
             super(PlayState.this.game);
-            ball = new Ball(c);
+            ball = new Ball(c,pos);
             resetListener();
         }
 
