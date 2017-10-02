@@ -32,7 +32,7 @@ public class AndroidLauncher extends AndroidApplication implements GameAdapter {
     @Override
     protected void onPause() {
         super.onPause();
-        orientationData.pause();
+        //orientationData.pause();
     }
 
     @Override
