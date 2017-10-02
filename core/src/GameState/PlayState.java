@@ -22,7 +22,6 @@ public class PlayState extends State {
     BucketWagon bucketWagon;
     Rectangle pauseBttnRect,arrowRect;
     Texture pauseBttn;
-    Vector2 arrowVelocity;
 
     public PlayState(WorDropGame ga, int wl) {
         super(ga);
@@ -37,7 +36,7 @@ public class PlayState extends State {
         arrow=new Texture("image\\arrow.png");
         arrowRect=new Rectangle();
         arrowRect.setWidth(game.WIDTH/15);
-        arrowRect.setHeight(game.WIDTH/8);
+        arrowRect.setHeight(game.HEIGHT/11);
         arrowRect.setX(10);
         arrowRect.setY(game.HEIGHT*8/9-arrowRect.getHeight());
         game.arrowVelocity=new Vector2(500,0);
@@ -101,12 +100,18 @@ public class PlayState extends State {
         //draw the wagon
         bucketWagon.draw(game.getBatch(), delta);
         game.getBatch().end();
-
+        Gdx.app.error("Roll:",game.getGameAdapter().getRollOrientation()+" /");
         //update the arrow position
         arrowRect.setX(arrowRect.x+game.arrowVelocity.x*delta);
-        if (arrowRect.x<=0||arrowRect.x+arrowRect.getWidth()>=game.WIDTH){
-            game.arrowVelocity.x=-game.arrowVelocity.x;
+        if (arrowRect.x<=0){
+            game.arrowVelocity.x=Math.abs(game.arrowVelocity.x);
         }
+        else if (arrowRect.x+arrowRect.getWidth()>=game.WIDTH){
+            game.arrowVelocity.x=-Math.abs(game.arrowVelocity.x);
+        }
+        /*if (arrowRect.x<=0||arrowRect.x+arrowRect.getWidth()>=game.WIDTH){
+            game.arrowVelocity.x=-game.arrowVelocity.x;
+        }*/
     }
 
     @Override
@@ -126,7 +131,7 @@ public class PlayState extends State {
     public void resume() {
         String result = game.getGameAdapter().getVoiceInput();
         Gdx.app.error("String", result );
-        if (result.length() > 0) {
+        if (result.length() ==1&& result.charAt(0)>='A') {
             Gdx.input.setInputProcessor(null);
             game.getGameAdapter().showToast("You said the letter: " + result.toUpperCase().charAt(0));
             game.getStateManager().push(new PlayState2(result.charAt(0),new Vector2(arrowRect.x,arrowRect.y)));
@@ -161,7 +166,7 @@ public class PlayState extends State {
 
         public PlayState2(char c,Vector2 pos) {
             super(PlayState.this.game);
-            ball = new Ball(c,pos);
+            ball = new Ball(c,pos,game.getGameAdapter().getRollOrientation());
             resetListener();
         }
 
@@ -204,6 +209,7 @@ public class PlayState extends State {
             //draw the wagon
             bucketWagon.draw(game.getBatch(), delta);
             game.getBatch().end();
+            Gdx.app.error("Roll:",game.getGameAdapter().getRollOrientation()+" /");
         }
 
         @Override

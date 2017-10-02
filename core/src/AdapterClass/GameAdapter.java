@@ -25,4 +25,9 @@ public interface GameAdapter {
      */
     String getVoiceInput();
 
+    /**
+     * Get the orientation of the phone
+     * @return the roll orientation
+     */
+    float getRollOrientation();
 }

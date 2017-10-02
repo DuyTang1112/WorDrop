@@ -30,4 +30,9 @@ public class StateManager {
     public State peek() {
         return stack.peek();
     }
+    public void dispose(){
+        while (!stack.empty()){
+            stack.pop().dispose();
+        }
+    }
 }

@@ -49,6 +49,7 @@ public class WorDropGame extends Game {
     @Override
     public void dispose() {
         batch.dispose();
+        stateManager.dispose();
     }
 
     public SpriteBatch getBatch() {

@@ -20,14 +20,28 @@ import AdapterClass.GameAdapter;
 public class AndroidLauncher extends AndroidApplication implements GameAdapter {
     private final int REQ_CODE_SPEECH_INPUT = 100;
     String res="";
+    OrientationData orientationData;
     @Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        orientationData=new OrientationData(this);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		initialize(new WorDropGame(this), config);
 	}
 
-	@Override
+    @Override
+    protected void onPause() {
+        super.onPause();
+        orientationData.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        orientationData.register();
+    }
+
+    @Override
 	public void showToast(final String s) {
 		handler.post(new Runnable() {
 			@Override
@@ -45,6 +59,14 @@ public class AndroidLauncher extends AndroidApplication implements GameAdapter {
     @Override
     public String getVoiceInput() {
         return res;
+    }
+
+    @Override
+    public float getRollOrientation() {
+        if (orientationData.getOrientation()!=null && orientationData.getStartOrientation()!=null){
+            return orientationData.getOrientation()[2]-orientationData.getStartOrientation()[2];
+        }
+        return 0;
     }
 
     private void promptSpeechInput() {

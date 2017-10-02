@@ -16,6 +16,16 @@ public class DesktopLauncher {
 			public void showToast(String s) {
 
 			}
+
+			@Override
+			public void voiceInput() {
+
+			}
+
+			@Override
+			public String getVoiceInput() {
+				return null;
+			}
 		}), config);
 	}
 }
