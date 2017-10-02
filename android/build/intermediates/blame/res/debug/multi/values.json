@@ -1,0 +1,99 @@
+[
+    {
+        "outputFile": "B:\\sach\\FALL 2017\\Software Engineering\\WorDrop\\android\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 52,
+                    "endOffset": 103
+                },
+                "from": {
+                    "file": "B:\\sach\\FALL 2017\\Software Engineering\\WorDrop\\android\\res\\values\\strings.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 108,
+                    "endColumn": 44,
+                    "endOffset": 148
+                },
+                "from": {
+                    "file": "B:\\sach\\FALL 2017\\Software Engineering\\WorDrop\\android\\res\\values\\strings.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 153,
+                    "endColumn": 52,
+                    "endOffset": 201
+                },
+                "from": {
+                    "file": "B:\\sach\\FALL 2017\\Software Engineering\\WorDrop\\android\\res\\values\\strings.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 206,
+                    "endColumn": 97,
+                    "endOffset": 299
+                },
+                "from": {
+                    "file": "B:\\sach\\FALL 2017\\Software Engineering\\WorDrop\\android\\res\\values\\strings.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 304,
+                    "endColumn": 56,
+                    "endOffset": 356
+                },
+                "from": {
+                    "file": "B:\\sach\\FALL 2017\\Software Engineering\\WorDrop\\android\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 207,
+                        "endColumn": 62,
+                        "endOffset": 265
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 361,
+                    "endColumn": 58,
+                    "endOffset": 415
+                },
+                "from": {
+                    "file": "B:\\sach\\FALL 2017\\Software Engineering\\WorDrop\\android\\res\\values\\strings.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 420,
+                    "endLine": 15,
+                    "endColumn": 12,
+                    "endOffset": 878
+                },
+                "from": {
+                    "file": "B:\\sach\\FALL 2017\\Software Engineering\\WorDrop\\android\\res\\values\\styles.xml"
+                }
+            }
+        ]
+    }
+]
