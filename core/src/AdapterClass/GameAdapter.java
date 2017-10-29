@@ -10,9 +10,9 @@ package AdapterClass;
 public interface GameAdapter {
     /**
      * Show a toast with message
-     * @param s- String to be shown
+     * @param message- String to be shown
      */
-    void showToast(String s);
+    void showToast(String message);
 
     /**
      * Starting a voice input activity
@@ -30,4 +30,14 @@ public interface GameAdapter {
      * @return the roll orientation
      */
     float getRollOrientation();
+
+    /**
+     *
+     * @param length input from user
+     * @param lower lower bound defined by the game
+     * @param higher higher bound defined by the game
+     * @return
+     */
+    String getAWord(int length,int lower, int higher);
+
 }

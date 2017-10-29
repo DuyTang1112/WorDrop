@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.mygdx.game.Database.DBHelper;
 import com.mygdx.game.WorDropGame;
 
 import java.util.ArrayList;
@@ -67,6 +68,11 @@ public class AndroidLauncher extends AndroidApplication implements GameAdapter {
             return orientationData.getOrientation()[2]-orientationData.getStartOrientation()[2];
         }
         return 0;
+    }
+
+    @Override
+    public String getAWord(int length, int lower, int higher) {
+        return DBHelper.getAWord(this,length,lower,higher);
     }
 
     private void promptSpeechInput() {

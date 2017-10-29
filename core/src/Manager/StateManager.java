@@ -9,7 +9,7 @@ import GameState.State;
  */
 
 /**
- * Managing back and forth between States
+ * Managing States instances by pushing and popping
  */
 public class StateManager {
     private Stack<State> stack;

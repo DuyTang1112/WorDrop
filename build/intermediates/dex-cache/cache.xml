@@ -3,39 +3,39 @@
 
     <item
         is-multidex="false"
-        jar="B:\sach\FALL 2017\Software Engineering\WorDrop\core\build\libs\core-1.0.jar"
+        jar="D:\Schoolwork\Fall2017\Software Engineering\WorDrop\core\build\libs\core-1.0.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="960db91d201ba31d38d02d4a157a23968754c59d">
-        <dex dex="B:\sach\FALL 2017\Software Engineering\WorDrop\android\build\intermediates\pre-dexed\debug\core-1.0_6fad7e6834c74547b04f15a4baa33146ae69d392.jar" />
+        sha1="eb70cda4a9156784841b8a4c7b3858929ee61229">
+        <dex dex="D:\Schoolwork\Fall2017\Software Engineering\WorDrop\android\build\intermediates\pre-dexed\debug\core-1.0_e70ea456e3ed83d6d5fb83d09ab7071ee00a0cf4.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Duy Anh Tang\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx\1.9.6\47d1e9b890e364ec28f128e9bb3b9a12a94c164\gdx-1.9.6.jar"
+        jar="C:\Users\Duy Tang\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx\1.9.6\47d1e9b890e364ec28f128e9bb3b9a12a94c164\gdx-1.9.6.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="047d1e9b890e364ec28f128e9bb3b9a12a94c164">
-        <dex dex="B:\sach\FALL 2017\Software Engineering\WorDrop\android\build\intermediates\pre-dexed\debug\gdx-1.9.6_02b1f17507153b37cf5afd217f9e24325714b84f.jar" />
+        <dex dex="D:\Schoolwork\Fall2017\Software Engineering\WorDrop\android\build\intermediates\pre-dexed\debug\gdx-1.9.6_25653374e444aca6383290933fae9a274ede9b04.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Duy Anh Tang\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-android\1.9.6\57c2831c870743712b808384187ea856e541878f\gdx-backend-android-1.9.6.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="57c2831c870743712b808384187ea856e541878f">
-        <dex dex="B:\sach\FALL 2017\Software Engineering\WorDrop\android\build\intermediates\pre-dexed\debug\gdx-backend-android-1.9.6_0ddacf39827790242278a613dba95816ade81cc4.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Duy Anh Tang\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-box2d\1.9.6\c249ef4060a4fada952f278455c8f7b9cba3c18a\gdx-box2d-1.9.6.jar"
+        jar="C:\Users\Duy Tang\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-box2d\1.9.6\c249ef4060a4fada952f278455c8f7b9cba3c18a\gdx-box2d-1.9.6.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="c249ef4060a4fada952f278455c8f7b9cba3c18a">
-        <dex dex="B:\sach\FALL 2017\Software Engineering\WorDrop\android\build\intermediates\pre-dexed\debug\gdx-box2d-1.9.6_a80e0826a65470e9800fd6f67065b3a7db91bf89.jar" />
+        <dex dex="D:\Schoolwork\Fall2017\Software Engineering\WorDrop\android\build\intermediates\pre-dexed\debug\gdx-box2d-1.9.6_fb2d3c260356b91f711e8537d3e249d8807d9d60.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Duy Tang\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-android\1.9.6\57c2831c870743712b808384187ea856e541878f\gdx-backend-android-1.9.6.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="57c2831c870743712b808384187ea856e541878f">
+        <dex dex="D:\Schoolwork\Fall2017\Software Engineering\WorDrop\android\build\intermediates\pre-dexed\debug\gdx-backend-android-1.9.6_0589ab7be959b587f08d0e0257461080c54291c9.jar" />
     </item>
 
 </items>

@@ -10,6 +10,9 @@ import AdapterClass.GameAdapter;
 import GameState.WelcomeState;
 import Manager.StateManager;
 
+/**
+ * Class that contains relevant settings information for the game and facilitates the creation of each states
+ */
 public class WorDropGame extends Game {
     private SpriteBatch batch;
     private GameAdapter gameAdapter;
@@ -17,6 +20,8 @@ public class WorDropGame extends Game {
     public int WIDTH;
     public int HEIGHT;
     public Vector2 arrowVelocity;
+    public int WORD_LOWER_BOUND=5;
+    public int WORD_HIGHER_BOUND=15;
 
     public WorDropGame(GameAdapter ga) {
         gameAdapter = ga;
