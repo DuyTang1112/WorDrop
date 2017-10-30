@@ -20,6 +20,12 @@ public class WordListDB extends SQLiteOpenHelper {
             public static final String COLUMN_NAME_SUBTITLE = "length";
         }
 
+        /**
+         * Table Name: = WordList (TABLE_NAME)
+         * Primary Key: ID (_ID)
+         * Keys: word, word length
+         * Potential key to be added: meaning, pronunciation.
+         */
         private static final String SQL_CREATE_ENTRIES =
                 "CREATE TABLE " + FeedEntry.TABLE_NAME + " (" +
                         FeedEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +

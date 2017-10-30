@@ -31,6 +31,11 @@ public class PauseState extends State {
         camera.update();
         game.getBatch().begin();
         game.getBatch().draw(background,0,0,game.WIDTH,game.HEIGHT);
+
+        //to be edited
+
+
+        //end to be edit
         game.getBatch().end();
     }
 
