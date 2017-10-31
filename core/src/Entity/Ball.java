@@ -1,7 +1,9 @@
 package Entity;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
@@ -18,6 +20,7 @@ public class Ball extends Circle implements Entity {
     Texture ballImage;
     char currentLetter;
     static float width = Gdx.graphics.getWidth() / 17, height = width;
+    BitmapFont font;
 
     public Ball(char s) {
         super(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() * 8 / 9 + height / 2, width / 2);
@@ -28,6 +31,9 @@ public class Ball extends Circle implements Entity {
         ballImage = new Texture("PlayState\\ball1.png");
         this.startTime = 0;
 
+        font=new BitmapFont();
+        font.setColor(Color.YELLOW);
+        font.getData().setScale(4);
     }
 
     public Ball(char s, Vector2 startPos, float roll) {
@@ -38,6 +44,10 @@ public class Ball extends Circle implements Entity {
         currentLetter = s;
         ballImage = new Texture("PlayState\\ball1.png");
         this.startTime = 0;
+
+        font=new BitmapFont();
+        font.setColor(Color.YELLOW);
+        font.getData().setScale(4);
     }
 
     public void reset(char s) {
@@ -74,6 +84,7 @@ public class Ball extends Circle implements Entity {
     public void draw(SpriteBatch sb, float deltatime) {
         //deltatime=Math.min(deltatime,1f/45f);
         sb.draw(ballImage, position.x, position.y, width, height);
+        font.draw(sb,currentLetter+"",x,y+height);
         update(deltatime);
 
     }

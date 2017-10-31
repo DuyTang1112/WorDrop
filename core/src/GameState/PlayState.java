@@ -42,7 +42,7 @@ public class PlayState extends State {
         arrowRect.setWidth(game.WIDTH / 15);
         arrowRect.setHeight(game.HEIGHT / 11);
         arrowRect.setX(10);
-        arrowRect.setY(game.HEIGHT * 8 / 9 - arrowRect.getHeight());
+        arrowRect.setY(game.HEIGHT * 8 / 9 - arrowRect.getHeight()*7);
         game.arrowVelocity = new Vector2(500, 0);
 
         Gdx.graphics.setContinuousRendering(true);
@@ -64,6 +64,7 @@ public class PlayState extends State {
                     game.setScreen(game.getStateManager().peek());
                     Gdx.input.setInputProcessor(null);
                 } else {
+                    //getting voice input
                     game.getGameAdapter().voiceInput();
                 }
                 return super.touchDown(screenX, screenY, pointer, button);
@@ -132,9 +133,9 @@ public class PlayState extends State {
      */
     @Override
     public void resume() {
-        String result = game.getGameAdapter().getVoiceInput();
+        String result = game.getGameAdapter().getVoiceInput().toLowerCase();
         Gdx.app.error("String", result);
-        if (result.length() == 1 && result.charAt(0) >= 'A') {
+        if (result.length() == 1 && result.charAt(0) >= 'a') {
             Gdx.input.setInputProcessor(null);
             game.getGameAdapter().showToast("You said the letter: " + result.toUpperCase().charAt(0));
             game.getStateManager().push(new PlayState2(result.charAt(0), new Vector2(arrowRect.x, arrowRect.y)));
