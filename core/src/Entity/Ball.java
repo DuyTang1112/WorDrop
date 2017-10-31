@@ -17,7 +17,7 @@ public class Ball extends Circle implements Entity {
     Vector2 position, velocity;
     Texture ballImage;
     char currentLetter;
-    static float width = Gdx.graphics.getWidth() / 12, height = width;
+    static float width = Gdx.graphics.getWidth() / 17, height = width;
 
     public Ball(char s) {
         super(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() * 8 / 9 + height / 2, width / 2);
@@ -48,9 +48,7 @@ public class Ball extends Circle implements Entity {
     @Override
     public void update(float deltatime) {
         //check if the ball hits any where
-        if (y - radius <= 0) {
-            velocity.y = Math.abs(velocity.y);
-        } else if (y + radius >= Gdx.graphics.getHeight()) {
+         if (y + radius >= Gdx.graphics.getHeight()) {
             velocity.y = -Math.abs(velocity.y);
         }
 

@@ -24,11 +24,11 @@ public class PlayState extends State {
     Rectangle pauseBttnRect, arrowRect;
     Texture pauseBttn;
 
-    public PlayState(WorDropGame ga, int wl) {
+    public PlayState(WorDropGame ga, String word) {
         super(ga);
-        wordlength = wl;
-        theWord = game.getGameAdapter().getAWord(wordlength, game.WORD_LOWER_BOUND, game.WORD_HIGHER_BOUND);
-        Gdx.app.log("Word Selected",theWord);
+        wordlength = word.length();
+        theWord = word;
+
         /*setting up the graphics components*/
         background = new Texture("image\\background2.jpg");
         heartLife = new Texture("image\\heart.png");
@@ -47,7 +47,7 @@ public class PlayState extends State {
 
         Gdx.graphics.setContinuousRendering(true);
 
-        bucketWagon = new BucketWagon(wordlength);
+        bucketWagon = new BucketWagon(wordlength, theWord);
         //ball = new Ball("s");
         resetListener();
         game.getGameAdapter().showToast("CLICK THE SCREEN!");
@@ -165,10 +165,12 @@ public class PlayState extends State {
      */
     public class PlayState2 extends State {
         Ball ball;
+        char currentLetter;
 
         public PlayState2(char c, Vector2 pos) {
             super(PlayState.this.game);
             ball = new Ball(c, pos, game.getGameAdapter().getRollOrientation());
+            currentLetter = c;
             resetListener();
         }
 
@@ -211,7 +213,31 @@ public class PlayState extends State {
             //draw the wagon
             bucketWagon.draw(game.getBatch(), delta);
             game.getBatch().end();
+
             Gdx.app.error("Roll:", game.getGameAdapter().getRollOrientation() + " /");
+            if (ball.y <= bucketWagon.getBucketBound() && ballHitsWagon()) {
+                //remove this state
+                game.getStateManager().pop();
+                game.setScreen(game.getStateManager().peek());
+            }
+            else if(ball.y<0){
+                //remove this state
+                game.getStateManager().pop();
+                game.setScreen(game.getStateManager().peek());
+            }
+        }
+
+        public boolean ballHitsWagon() {
+            Rectangle[] wagon = bucketWagon.getBucketPos();
+            for (int i = 0; i < wagon.length; i++) {
+                if (wagon[i].contains(new Vector2(ball.x,ball.y))) {
+                    if (!bucketWagon.checkAndSetHit(i, currentLetter)) {
+                        game.getGameAdapter().showToast("Not the right position!");
+                    }
+                    return true;
+                }
+            }
+            return false;
         }
 
         @Override

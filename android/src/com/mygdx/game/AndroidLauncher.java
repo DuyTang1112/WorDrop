@@ -26,6 +26,7 @@ public class AndroidLauncher extends AndroidApplication implements GameAdapter {
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         orientationData=new OrientationData(this);
+        DBHelper.writeData(this,5,15);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		initialize(new WorDropGame(this), config);
 	}

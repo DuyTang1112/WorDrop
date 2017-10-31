@@ -36,7 +36,7 @@ public interface GameAdapter {
      * @param length input from user
      * @param lower lower bound defined by the game
      * @param higher higher bound defined by the game
-     * @return
+     * @return a random word with specified length, "" if can't find any
      */
     String getAWord(int length,int lower, int higher);
 

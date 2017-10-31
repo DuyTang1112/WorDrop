@@ -26,6 +26,16 @@ public class DesktopLauncher {
 			public String getVoiceInput() {
 				return null;
 			}
+
+			@Override
+			public float getRollOrientation() {
+				return 0;
+			}
+
+			@Override
+			public String getAWord(int length, int lower, int higher) {
+				return null;
+			}
 		}), config);
 	}
 }

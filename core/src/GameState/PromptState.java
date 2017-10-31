@@ -27,9 +27,17 @@ public class PromptState extends State {
                     int x = Integer.parseInt(text);
                     if (x >= game.WORD_LOWER_BOUND && x <=game.WORD_HIGHER_BOUND) {
                         lengthword = x;
+                        String theword=game.getGameAdapter().getAWord(lengthword,game.WORD_LOWER_BOUND,game.WORD_HIGHER_BOUND);
+                        Gdx.app.log("Word Selected", theword);
                         // proceed to next state by setting the screen
-                        game.getStateManager().push(new PlayState(game, lengthword));
-                        game.setScreen(game.getStateManager().peek());
+                        if (theword.length()>0){
+                            game.getStateManager().push(new PlayState(game, theword));
+                            game.setScreen(game.getStateManager().peek());
+                        }
+                        else{
+                            game.getGameAdapter().showToast("No word found with specified length");
+                            Gdx.input.getTextInput(listener, "Input your word length", "", "");
+                        }
                     } else {
                         game.getGameAdapter().showToast("Please input a proper word length");
                         Gdx.input.getTextInput(listener, "Input your word length", "", "");
