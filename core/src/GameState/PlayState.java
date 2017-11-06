@@ -43,6 +43,7 @@ public class PlayState extends State {
 
         Gdx.graphics.setContinuousRendering(true);
 
+        //bucket wagon set up
         bucketWagon = new BucketWagon(wordlength, theWord);
         //ball = new Ball("s");
         resetListener();
@@ -107,6 +108,13 @@ public class PlayState extends State {
         game.getBatch().end();
         Gdx.app.error("Roll:", game.getGameAdapter().getRollOrientation() + " /");
 
+        if (bucketWagon.gameIsFinished()){
+            //game.getStateManager().pop();//Playstate 2 is popped
+            game.getStateManager().pop();// Playstate is popped
+            game.getStateManager().pop();// PromptState is popped
+            game.setScreen(game.getStateManager().peek());// back to WelcomeState
+            game.getGameAdapter().showToast("Congratulations! You finished the game");
+        }
 
     }
 
@@ -218,12 +226,7 @@ public class PlayState extends State {
                 game.getStateManager().pop();
                 game.setScreen(game.getStateManager().peek());
             }
-            if (bucketWagon.gameIsFinished()){
-                game.getStateManager().pop();//Playstate 2 is popped
-                game.getStateManager().pop();// Playstate is popped
-                game.getStateManager().pop();// PromptState is popped
-                game.setScreen(game.getStateManager().peek());// back to WelcomeState
-            }
+
         }
 
         /**
