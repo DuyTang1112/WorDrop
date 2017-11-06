@@ -96,11 +96,12 @@ public class AndroidLauncher extends AndroidApplication implements GameAdapter {
 
         switch (requestCode) {
             case REQ_CODE_SPEECH_INPUT: {
-                if (resultCode == RESULT_OK && null != data) {
+                if (resultCode == RESULT_OK && null != data) {//if there is voice input
 
                     ArrayList<String> result = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     Iterator<String> it=result.iterator();
+                    Log.d("Reading input list",result.toString());
                     while (it.hasNext()){
                         String s=it.next();
                         // only choosing a letter input
@@ -110,7 +111,10 @@ public class AndroidLauncher extends AndroidApplication implements GameAdapter {
                         }
                     }
 
-                    Log.d("Reading input list",result.toString());
+
+                }
+                else{ //if there is no input
+                    res="";
                 }
                 break;
             }

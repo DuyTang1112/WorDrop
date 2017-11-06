@@ -6,6 +6,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * Created by Duy Anh Tang on 9/29/2017.
  */
 
+
+/**
+ * A class to represent dynamic entities
+ */
 public interface Entity {
     /* Velocity is pixel/s */
     /**
