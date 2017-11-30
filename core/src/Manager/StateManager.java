@@ -11,6 +11,7 @@ import GameState.State;
 /**
  * Managing States instances by pushing and popping
  */
+
 public class StateManager {
     private Stack<State> stack;
 

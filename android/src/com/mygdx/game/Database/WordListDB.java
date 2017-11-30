@@ -30,9 +30,9 @@ public class WordListDB extends SQLiteOpenHelper {
                 "DROP TABLE IF EXISTS " + FeedEntry.TABLE_NAME;
 
     }
-    public static WordListDB sqlInstance=null;
-    public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "WordList.db";
+    private static WordListDB sqlInstance=null;
+    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "WordList.db";
 
     private WordListDB(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

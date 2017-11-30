@@ -26,7 +26,8 @@ public class Arrow implements Entity {
         arrowRect.setWidth(gameInstance.WIDTH / 15);
         arrowRect.setHeight(gameInstance.HEIGHT / 11);
         arrowRect.setX(10);
-        arrowRect.setY(gameInstance.HEIGHT * 8 / 9 - arrowRect.getHeight()*7);
+        //arrowRect.setY(gameInstance.HEIGHT * 8 / 9 - arrowRect.getHeight()*7);
+        arrowRect.setY(gameInstance.HEIGHT * 8 / 9 - arrowRect.getHeight());
         gameInstance.arrowVelocity = new Vector2(500, 0);
     }
     @Override

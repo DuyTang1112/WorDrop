@@ -11,7 +11,7 @@ import com.mygdx.game.WorDropGame;
  */
 
 public abstract class State implements Screen {
-    WorDropGame game;
+    static WorDropGame game;
     OrthographicCamera camera;
     public State(WorDropGame ga){
 

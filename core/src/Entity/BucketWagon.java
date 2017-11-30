@@ -136,6 +136,7 @@ public class BucketWagon implements Entity {
     public float getBucketBound(){
         return bucketPos[0].y+bucketPos[0].getHeight();
     }
+
     public boolean gameIsFinished(){
         for (char c: hit){
             if (c=='_'){

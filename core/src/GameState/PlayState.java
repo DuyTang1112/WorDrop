@@ -19,7 +19,7 @@ import Entity.BucketWagon;
 public class PlayState extends State {
     public static int wordlength;
     private static String theWord;
-    public static final Vector2 gravity = new Vector2(0, -800);
+    public static final Vector2 gravity = new Vector2(0, -200);
     Texture background, heartLife;
     BucketWagon bucketWagon;
     Rectangle pauseBttnRect, arrowRect;
@@ -35,9 +35,9 @@ public class PlayState extends State {
         background = new Texture("image\\background2.jpg");
         heartLife = new Texture("image\\heart.png");
         //pause button
-        pauseBttn = new Texture("PlayState\\PauseBttn2.png");
-        pauseBttnRect = new Rectangle((float) (game.WIDTH * 4.9 / 6), game.HEIGHT - game.WIDTH / 6,
-                game.WIDTH / 6, game.WIDTH / 6);
+        pauseBttn = new Texture("PlayState\\PauseBttn.png");
+        pauseBttnRect = new Rectangle((float) (game.WIDTH * 6.9 / 8), game.HEIGHT - game.WIDTH / 8-20,
+                game.WIDTH / 8, game.WIDTH / 8);
         //arrow set up
         arrow=new Arrow(game);
 
@@ -59,7 +59,6 @@ public class PlayState extends State {
                     // set the screen to pause state
                     game.getStateManager().push(new PauseState(game));
                     game.setScreen(game.getStateManager().peek());
-                    Gdx.input.setInputProcessor(null);
                 } else {
                     //getting voice input
                     game.getGameAdapter().voiceInput();
@@ -141,7 +140,7 @@ public class PlayState extends State {
             game.getStateManager().push(new PlayState2(result.charAt(0), new Vector2(arrow.getX(), arrow.getY())));
             game.setScreen(game.getStateManager().peek());
         } else {
-            game.getGameAdapter().showToast("SAY AGAIN!!");
+            //game.getGameAdapter().showToast("SAY AGAIN!!");
         }
 
     }
@@ -170,7 +169,7 @@ public class PlayState extends State {
 
         public PlayState2(char c, Vector2 pos) {
             super(PlayState.this.game);
-            ball = new Ball(c, pos, game.getGameAdapter().getRollOrientation());
+            ball = new Ball(c, pos, game.getGameAdapter());
             currentLetter = c;
             resetListener();
         }
@@ -184,7 +183,7 @@ public class PlayState extends State {
                         // set the screen to pause state
                         game.getStateManager().push(new PauseState(game));
                         game.setScreen(game.getStateManager().peek());
-                        Gdx.input.setInputProcessor(null);
+
                     }
                     return super.touchDown(screenX, screenY, pointer, button);
                 }
