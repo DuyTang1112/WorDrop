@@ -67,9 +67,9 @@ public class Ball extends Circle implements Entity {
         }
 
         if (x - radius <= 0) {
-            velocity.x = Math.abs(velocity.x);
+            velocity.x = Math.abs(velocity.x*8/10);
         } else if (x + radius >= Gdx.graphics.getWidth()) {
-            velocity.x = -Math.abs(velocity.x);
+            velocity.x = -Math.abs(velocity.x*8/10);
         }
         //update velocity
         velocity.y += PlayState.gravity.y * (deltatime);

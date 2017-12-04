@@ -122,16 +122,21 @@ public class BucketWagon implements Entity {
      * @param letter the current letter the ball hits with
      * @return true if the order the letter is hitting is correct, false if not
      */
-    public boolean checkAndSetHit(int i, char letter){
-        if (theword.charAt(i)==letter){
-            hit[i]=letter;
-            Gdx.app.log("Status","hit");
-            return true;
+    public int checkAndSetHit(int i, char letter){
+        if (theword.charAt(i)==letter) {
+            hit[i] = letter;
+            Gdx.app.log("Status", "hit");
+            return 1;
+        }
+        else if (theword.contains(letter+"")){
+            Gdx.app.log("Status", "missed hit");
+            return 0;
         }
         else{
-            Gdx.app.log("Status","no hit");
-            return false;
+            Gdx.app.log("Status","not the right char");
+            return -1;
         }
+
     }
     public float getBucketBound(){
         return bucketPos[0].y+bucketPos[0].getHeight();

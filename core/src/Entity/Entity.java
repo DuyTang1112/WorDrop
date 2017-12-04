@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
 /**
- * A class to represent dynamic entities
+ * An interface to represent dynamic entities
  */
 public interface Entity {
     /* Velocity is pixel/s */

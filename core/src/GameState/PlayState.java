@@ -236,8 +236,12 @@ public class PlayState extends State {
             Rectangle[] wagon = bucketWagon.getBucketPos();
             for (int i = 0; i < wagon.length; i++) {
                 if (wagon[i].contains(new Vector2(ball.x,ball.y))) {
-                    if (!bucketWagon.checkAndSetHit(i, currentLetter)) {
+                    int status=bucketWagon.checkAndSetHit(i, currentLetter);
+                    if (status==0) {
                         game.getGameAdapter().showToast("Not the right position!");
+                    }
+                    else if(status ==-1){
+                        game.getGameAdapter().showToast("Letter is not in the word!");
                     }
                     return true;
                 }
