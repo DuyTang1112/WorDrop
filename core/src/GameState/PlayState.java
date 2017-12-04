@@ -19,7 +19,7 @@ import Entity.BucketWagon;
 public class PlayState extends State {
     public static int wordlength;
     private static String theWord;
-    public static final Vector2 gravity = new Vector2(0, -200);
+    public static final Vector2 gravity = new Vector2(0, -game.HEIGHT/10);
     Texture background, heartLife;
     BucketWagon bucketWagon;
     Rectangle pauseBttnRect, arrowRect;

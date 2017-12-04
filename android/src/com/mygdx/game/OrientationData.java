@@ -5,6 +5,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.widget.Toast;
 
 /**
  * Created by Duy Anh Tang on 10/1/2017.
@@ -37,6 +38,22 @@ public class OrientationData implements SensorEventListener {
         manager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         accelerometer = manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         magnometer = manager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        if (manager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null){
+            // Success! There's a magnetometer.
+            Toast.makeText(context,"There is magnetomoeter",Toast.LENGTH_SHORT).show();
+        }
+        else {
+            // Failure! No magnetometer.
+            Toast.makeText(context,"There is magnetomoeter",Toast.LENGTH_SHORT).show();
+        }
+        if (manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null){
+            // Success! There's a magnetometer.
+            Toast.makeText(context,"There is accelerometer",Toast.LENGTH_SHORT).show();
+        }
+        else {
+            // Failure! No magnetometer.
+            Toast.makeText(context,"There is accelerometer",Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void register() {
