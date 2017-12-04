@@ -102,6 +102,7 @@ public class AndroidLauncher extends AndroidApplication implements GameAdapter {
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     Iterator<String> it=result.iterator();
                     Log.d("Reading input list",result.toString());
+                    boolean checkforn=false;
                     while (it.hasNext()){
                         String s=it.next();
                         // only choosing a letter input
@@ -109,9 +110,12 @@ public class AndroidLauncher extends AndroidApplication implements GameAdapter {
                             res=s;
                             break;
                         }
+                        else if (s.equals("and")||s.equals("end")){
+                            checkforn=true;
+
+                        }
                     }
-
-
+                    if (!res.equals("")&&checkforn) res="n";
                 }
                 else{ //if there is no input
                     res="";

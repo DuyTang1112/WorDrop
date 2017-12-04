@@ -105,7 +105,7 @@ public class PlayState extends State {
         //draw the wagon
         bucketWagon.draw(game.getBatch(), delta);
         game.getBatch().end();
-        Gdx.app.error("Roll:", game.getGameAdapter().getRollOrientation() + " /");
+        //Gdx.app.error("Roll:", game.getGameAdapter().getRollOrientation() + " /");
 
         if (bucketWagon.gameIsFinished()){
             //game.getStateManager().pop();//Playstate 2 is popped
@@ -214,7 +214,7 @@ public class PlayState extends State {
             bucketWagon.draw(game.getBatch(), delta);
             game.getBatch().end();
 
-            Gdx.app.error("Roll:", game.getGameAdapter().getRollOrientation() + " /");
+            //Gdx.app.error("Roll:", game.getGameAdapter().getRollOrientation() + " /");
             if (ball.y <= bucketWagon.getBucketBound() && ballHitsWagon()) {
                 //remove this state
                 game.getStateManager().pop();
@@ -238,10 +238,14 @@ public class PlayState extends State {
                 if (wagon[i].contains(new Vector2(ball.x,ball.y))) {
                     int status=bucketWagon.checkAndSetHit(i, currentLetter);
                     if (status==0) {
-                        game.getGameAdapter().showToast("Not the right position!");
+                        //game.getGameAdapter().showToast("Not the right position!");
+                        game.getGameAdapter().showToast("Wrong position! #"+currentLetter+" left:"+bucketWagon.getCounter().get(currentLetter));
                     }
                     else if(status ==-1){
                         game.getGameAdapter().showToast("Letter is not in the word!");
+                    }
+                    else{
+                        game.getGameAdapter().showToast("#"+currentLetter+" left:"+bucketWagon.getCounter().get(currentLetter));
                     }
                     return true;
                 }

@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Rectangle;
 import java.awt.Color;
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * Created by Duy Anh Tang on 9/21/2017.
@@ -27,6 +28,7 @@ public class BucketWagon implements Entity {
     Texture bucketImg;
     char[] hit;
     BitmapFont font ;
+    HashMap<Character,Integer> counter;
 
     public BucketWagon(int numBuckets,String theword) {
         this(100, numBuckets,theword);
@@ -38,6 +40,15 @@ public class BucketWagon implements Entity {
         font.getData().setScale(5);
 
         this.theword=theword;
+        counter=new HashMap<Character, Integer>();
+        for (char c:theword.toCharArray()){
+            if (counter.containsKey(c)){
+                counter.put(c,counter.get(c)+1);
+            }
+            else{
+                counter.put(c,1);
+            }
+        }
         //setting up wheels animation
         Texture whole = new Texture(Gdx.files.internal("PlayState\\wheels.png"));
         TextureRegion[][] tmp = TextureRegion.split(whole, 512 / 16, 256 / 8);
@@ -79,8 +90,11 @@ public class BucketWagon implements Entity {
             i.setX(i.getX() + velocity * dt);
         }
         //check if the wagon goes out of screen
-        if (wheelRect.x + wheelDistance + wheelRect.getWidth() >= Gdx.graphics.getWidth() || wheelRect.x < 0) {
-            velocity = -velocity;
+        if (wheelRect.x + wheelDistance + wheelRect.getWidth() >= Gdx.graphics.getWidth()*11/10) {
+            velocity = -Math.abs(velocity);
+        }
+        else if (wheelRect.x < -Gdx.graphics.getWidth()*1/10){
+            velocity = Math.abs(velocity);
         }
 
 
@@ -124,8 +138,11 @@ public class BucketWagon implements Entity {
      */
     public int checkAndSetHit(int i, char letter){
         if (theword.charAt(i)==letter) {
+            if (hit[i]==letter) return 0;
             hit[i] = letter;
             Gdx.app.log("Status", "hit");
+            counter.put(letter,counter.get(letter)-1);
+
             return 1;
         }
         else if (theword.contains(letter+"")){
@@ -149,5 +166,8 @@ public class BucketWagon implements Entity {
             }
         }
         return true;
+    }
+    public HashMap<Character,Integer> getCounter(){
+        return counter;
     }
 }

@@ -4,6 +4,9 @@
 
     <uses-sdk android:minSdkVersion="9" android:targetSdkVersion="25" />
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-feature android:name="android.hardware.sensor.accelerometer"
+        android:required="true" />
+    <uses-feature android:name="android.hardware.sensor.compass" android:required="true"/>
 
     <application
         android:allowBackup="true"
